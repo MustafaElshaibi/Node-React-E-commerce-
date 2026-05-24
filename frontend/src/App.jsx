@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 // Sheba Platform
-import ShebaPlatform from "./pages/sheba/ShebaPlatform";
+import ShebaLandingPage from "./pages/sheba/ShebaLandingPage";
 
 // Legacy Pages
 import HomePage from "./pages/user/HomePage";
@@ -32,7 +32,7 @@ function App() {
     <div className="min-h-screen">
       <Routes>
         {/* Sheba Platform - Main Route */}
-        <Route path="/" element={<ShebaPlatform />} />
+        <Route path="/" element={<ShebaLandingPage />} />
 
         {/* Legacy E-commerce Routes */}
         <Route element={<Layout />}>
