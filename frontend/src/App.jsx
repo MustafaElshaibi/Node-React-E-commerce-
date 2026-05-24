@@ -1,14 +1,8 @@
-// utility routes
 import { Routes, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-// Sheba Pages
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-import LandingPage from "./pages/sheba/LandingPage";
-import ServicesPage from "./pages/sheba/ServicesPage";
-import DashboardPage from "./pages/sheba/DashboardPage";
+// Sheba Platform
+import ShebaPlatform from "./pages/sheba/ShebaPlatform";
 
 // Legacy Pages
 import HomePage from "./pages/user/HomePage";
@@ -20,7 +14,7 @@ import ProductPage from "./pages/user/ProductPage";
 import CartPage from "./pages/user/CartPage";
 import ShopPage from "./pages/user/ShopPage";
 
-// admin routes
+// Admin routes
 import AdminLayout from "./components/admin/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
 import ProductManagement from "./pages/admin/ProductManagement";
@@ -33,64 +27,12 @@ import ProtectedRoute from "./auth/ProtectedRoute";
 
 function App() {
   const { user } = useSelector((state) => state.auth);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [isDarkMode]);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-950">
+    <div className="min-h-screen">
       <Routes>
-        {/* Sheba Platform Routes */}
-        <Route path="/" element={
-          <div className="flex flex-col min-h-screen">
-            <Navbar 
-              isAuthenticated={!!user} 
-              isDarkMode={isDarkMode}
-              onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
-              user={user}
-            />
-            <main className="flex-1">
-              <LandingPage />
-            </main>
-            <Footer />
-          </div>
-        } />
-        
-        <Route path="/services" element={
-          <div className="flex flex-col min-h-screen">
-            <Navbar 
-              isAuthenticated={!!user}
-              isDarkMode={isDarkMode}
-              onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
-              user={user}
-            />
-            <main className="flex-1">
-              <ServicesPage />
-            </main>
-            <Footer />
-          </div>
-        } />
-
-        <Route path="/dashboard" element={
-          <div className="flex flex-col min-h-screen">
-            <Navbar 
-              isAuthenticated={!!user}
-              isDarkMode={isDarkMode}
-              onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
-              user={user}
-            />
-            <main className="flex-1">
-              <DashboardPage />
-            </main>
-            <Footer />
-          </div>
-        } />
+        {/* Sheba Platform - Main Route */}
+        <Route path="/" element={<ShebaPlatform />} />
 
         {/* Legacy E-commerce Routes */}
         <Route element={<Layout />}>
