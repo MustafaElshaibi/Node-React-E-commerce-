@@ -1,4 +1,4 @@
-const  BASE_URL = '';
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
 const USERS_URL = '/api/users';
 const AUTH_URL = '/api/auth';
 const PRODUCTS_URL = '/api/products';
