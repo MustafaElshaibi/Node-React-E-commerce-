@@ -54,16 +54,23 @@ const StarRating = ({ rating, size = 'sm' }) => {
 const ProductCard = ({ product }) => {
   const originalPrice = product.discount > 0 ? product.price / (1 - product.discount / 100) : null
   const savings = originalPrice ? originalPrice - product.price : 0
+  const displayImage = product.image || (product.images && product.images[0]) || null
 
   return (
     <Link to={`/product/${product.productId}`}>
       <div className="group relative bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100">
         <div className="relative aspect-square overflow-hidden bg-gray-50">
-          <img
-            src={product.image}
-            alt={product.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-          />
+          {displayImage ? (
+            <img
+              src={displayImage}
+              alt={product.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+          ) : (
+            <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+              <span className="text-gray-400">No image</span>
+            </div>
+          )}
           
           {/* Badges */}
           <div className="absolute top-3 left-3 flex flex-col gap-2">

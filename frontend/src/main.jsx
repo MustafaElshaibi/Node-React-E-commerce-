@@ -5,16 +5,25 @@ import App from './App.jsx'
 import { Provider } from 'react-redux'
 import store from './redux/store.js'
 import {BrowserRouter} from 'react-router-dom'
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "@/components/Theme-provider"
 import { api } from './redux/api/api'
 import { setLoading, setUser } from './redux/features/authSlice'
 
 const intitilizeListener = async ()=> {
-  const data = await store.dispatch(
-    api.endpoints.getProfile.initiate()
-  )
-  if(data?.data?.data?.user) {
-    store.dispatch(setUser(data?.data?.data?.user));
+  try {
+    const state = store.getState();
+    const hasToken = state.auth?.accessToken;
+    
+    if (hasToken) {
+      const data = await store.dispatch(
+        api.endpoints.getProfile.initiate()
+      )
+      if(data?.data?.data?.user) {
+        store.dispatch(setUser(data?.data?.data?.user));
+      }
+    }
+  } catch (error) {
+    console.log("[v0] Profile fetch error:", error);
   }
 
   store.dispatch(setLoading(false));
