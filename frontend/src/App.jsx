@@ -1,5 +1,5 @@
 // utility routes
-import { Routes, Route } from "react-router";
+import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/user/HomePage";
 import { Toaster } from "@/components/ui/sonner";
 import ErrorToaster from "./utility/ErrorToaster";
